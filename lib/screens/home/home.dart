@@ -18,22 +18,27 @@ class HomeState extends ConsumerState<Home> {
     final listFavorite = ref.watch(addProvider);
     Widget content = Expanded(
       child: ListView.builder(
-          itemCount: listFavorite.length,
-          itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => Detail(
-                        data: listFavorite[index],
-                      ),
-                    ),
-                  );
-                },
-                child: Text(
-                  listFavorite[index].title,
-                  style: const TextStyle(color: Colors.white),
+        itemCount: listFavorite.length,
+        itemBuilder: (context, index) => ListTile(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => Detail(
+                  data: listFavorite[index],
                 ),
-              )),
+              ),
+            );
+          },
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundImage: FileImage(listFavorite[index].image),
+          ),
+          title: Text(
+            listFavorite[index].title,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
     );
 
     if (listFavorite.isEmpty) {
@@ -66,7 +71,8 @@ class HomeState extends ConsumerState<Home> {
           )
         ],
       ),
-      body: Padding(padding: const EdgeInsets.all(16), child: content),
+      body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16), child: content),
     );
   }
 }
