@@ -24,7 +24,30 @@ class Detail extends ConsumerWidget {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-            )
+            ),
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 32, horizontal: 16),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Colors.red, Colors.blue],
+                            begin: AlignmentDirectional.topCenter,
+                            end: Alignment.bottomCenter),
+                      ),
+                      child: Text(
+                        data.title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ))
           ],
         ));
   }

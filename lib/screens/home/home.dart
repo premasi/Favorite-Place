@@ -37,6 +37,10 @@ class HomeState extends ConsumerState<Home> {
             listFavorite[index].title,
             style: const TextStyle(color: Colors.white),
           ),
+          subtitle: const Text(
+            "Subtitle address",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
