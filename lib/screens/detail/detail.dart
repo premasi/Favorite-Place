@@ -43,7 +43,8 @@ class Detail extends ConsumerWidget {
                       ),
                       child: Text(
                         data.title,
-                        style: const TextStyle(color: Colors.white),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 32),
                       ),
                     ),
                   ],

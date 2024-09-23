@@ -6,6 +6,8 @@ import 'package:favorite_places/widgets/image_input.dart';
 import 'package:favorite_places/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart' as syspath;
+import 'package:path/path.dart' as path;
 
 class Add extends ConsumerStatefulWidget {
   const Add({super.key});
@@ -22,16 +24,20 @@ class AddState extends ConsumerState {
   File? selectedImage;
   FavoriteLocation? selectedLocation;
   var isSending = false;
-  void saveItem() {
+  void saveItem() async {
     if (formKey.currentState!.validate()) {
       setState(() {
         isSending = true;
       });
       formKey.currentState!.save();
       if (selectedImage != null) {
+        final appPath = await syspath.getApplicationDocumentsDirectory();
+        final filename = path.basename(selectedImage!.path);
+        final copyImage =
+            await selectedImage!.copy('${appPath.path}/$filename');
         final data = FavoriteModel(
           title: inputTitle,
-          image: selectedImage!,
+          image: copyImage,
         );
         ref.read(addProvider.notifier).addData(data);
         Navigator.of(context).pop();

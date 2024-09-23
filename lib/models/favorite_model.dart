@@ -4,11 +4,10 @@ import 'dart:io';
 const uuid = Uuid();
 
 class FavoriteModel {
-  FavoriteModel({
-    required this.title,
-    required this.image,
-    // required this.location,
-  }) : id = uuid.v4();
+  FavoriteModel({required this.title, required this.image, id
+      // required this.location,
+      })
+      : id = id ?? uuid.v4();
   final String id;
   final String title;
   final File image;
